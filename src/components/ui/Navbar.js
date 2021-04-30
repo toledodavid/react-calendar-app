@@ -4,7 +4,7 @@ import React from 'react';
 const Navbar = () => {
   return(
     <nav className="navbar navbar-dark bg-dark mb-4">
-      <a className="navbar-brand" href="#">Alex</a>
+      <span className="navbar-brand">Alex</span>
 
       <button className="btn btn-outline-danger">
         <i className="fas fa-sign-out-alt"></i> Salir
