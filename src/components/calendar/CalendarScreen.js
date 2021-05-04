@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { uiOpenModalAction } from '../../actions/uiActions';
+import { calendarEventSetActiveAction } from '../../actions/calendarEventsActions';
 
 import {Calendar, momentLocalizer} from 'react-big-calendar';
 import moment from 'moment';
@@ -48,7 +49,8 @@ const CalendarScreen = () => {
   }
 
   const onSelectEvent = (event) => {
-    console.log(event);
+    //console.log(event);
+    dispatch(calendarEventSetActiveAction(event));
   }
 
   const onViewChange = (event) => {
