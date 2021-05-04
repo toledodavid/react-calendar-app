@@ -7,6 +7,7 @@ import moment from 'moment';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
+import { calendarEventAddNewAction } from '../../actions/calendarEventsActions';
 
 
 
@@ -90,6 +91,14 @@ const CalendarModal = () => {
       return;
     }
 
+    dispatch(calendarEventAddNewAction({
+      ...formValues,
+      id: new Date().getTime(),
+      user: {
+        _id: '222',
+        name: 'Alex'
+      }
+    }));
 
     setTitleValid(true);
     closeModal();
