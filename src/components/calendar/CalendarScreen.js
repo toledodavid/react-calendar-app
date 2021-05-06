@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { uiOpenModalAction } from '../../actions/uiActions';
-import { calendarEventSetActiveAction } from '../../actions/calendarEventsActions';
+import { calendarEventClearActiveEventAction, calendarEventSetActiveAction } from '../../actions/calendarEventsActions';
 
 import {Calendar, momentLocalizer} from 'react-big-calendar';
 import moment from 'moment';
@@ -16,6 +16,7 @@ import 'moment/locale/es';
 import CalendarEvent from './CalendarEvent';
 import CalendarModal from './CalendarModal';
 import AddNewFab from '../ui/AddNewFab';
+import DeleteEventFab from '../ui/DeleteEventFab';
 
 
 moment.locale('es');
@@ -40,7 +41,7 @@ const CalendarScreen = () => {
 
   const dispatch = useDispatch();
 
-  const {events} = useSelector(state => state.calendar);
+  const {events, activeEvent} = useSelector(state => state.calendar);
 
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
 
@@ -59,6 +60,10 @@ const CalendarScreen = () => {
   const onViewChange = (event) => {
     setLastView(event);
     localStorage.setItem('lastView', event);
+  }
+
+  const onSelectSlot = () => {
+    dispatch(calendarEventClearActiveEventAction());
   }
 
   const eventStyleGetter = (event, start, end, isSelected) => {
@@ -90,11 +95,15 @@ const CalendarScreen = () => {
         onDoubleClickEvent={onDoubleClick}
         onSelectEvent={onSelectEvent}
         onView={onViewChange}
+        onSelectSlot={onSelectSlot}
+        selectable={true}
         view={lastView}
         components={{event: CalendarEvent}}
       />
 
       <AddNewFab />
+
+      { activeEvent && <DeleteEventFab />}
 
       <CalendarModal />
     </div>

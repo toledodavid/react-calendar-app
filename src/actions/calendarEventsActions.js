@@ -19,3 +19,7 @@ export const calendarEventUpdatedAction = (event) => ({
   type: types.calendarEventUpdated,
   payload: event
 });
+
+export const calendarEventDeletedAction = () => ({
+  type: types.calendarEventDeleted
+});
