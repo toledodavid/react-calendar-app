@@ -14,3 +14,8 @@ export const calendarEventSetActiveAction = (event) => ({
 export const calendarEventClearActiveEventAction = () => ({
   type: types.calendarEventClearActiveEvent
 });
+
+export const calendarEventUpdatedAction = (event) => ({
+  type: types.calendarEventUpdated,
+  payload: event
+});
