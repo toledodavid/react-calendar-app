@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { uiOpenModalAction } from '../../actions/uiActions';
 import { calendarEventSetActiveAction } from '../../actions/calendarEventsActions';
 
@@ -22,23 +22,25 @@ moment.locale('es');
 
 const localizer = momentLocalizer(moment);
 
-const events = [
-  {
-    title: 'Cumpleaños del jefe',
-    start: moment().toDate(),
-    end: moment().add(2, 'hours').toDate(),
-    bgcolor: '#fafafa',
-    user: {
-      _id: '123',
-      name: 'David'
-    }
-  }
-];
+// const events = [
+//   {
+//     title: 'Cumpleaños del jefe',
+//     start: moment().toDate(),
+//     end: moment().add(2, 'hours').toDate(),
+//     bgcolor: '#fafafa',
+//     user: {
+//       _id: '123',
+//       name: 'David'
+//     }
+//   }
+// ];
 
 
 const CalendarScreen = () => {
 
   const dispatch = useDispatch();
+
+  const {events} = useSelector(state => state.calendar);
 
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
 
@@ -52,7 +54,6 @@ const CalendarScreen = () => {
   const onSelectEvent = (event) => {
     //console.log(event);
     dispatch(calendarEventSetActiveAction(event));
-    dispatch(uiOpenModalAction());
   }
 
   const onViewChange = (event) => {

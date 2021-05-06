@@ -10,3 +10,7 @@ export const calendarEventSetActiveAction = (event) => ({
   type: types.calendarEventSetActive,
   payload: event
 });
+
+export const calendarEventClearActiveEventAction = () => ({
+  type: types.calendarEventClearActiveEvent
+});
